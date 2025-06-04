@@ -9,7 +9,7 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+        'canRegister' => Route::has('registerkahlkasdhl'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
@@ -25,6 +25,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+    Route::get('/items/create', [ItemController::class, 'add'])->name('items.add');
+    Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+    Route::get('/items/{id}/edit', [ItemController::class, 'edit'])->name('items.edit');
+    Route::patch('/items/{id}', [ItemController::class, 'update'])->name('items.update');
+    Route::get('/items/{id}/edit-stock', [ItemController::class, 'editStock'])->name('items.edit-stock');
+    Route::patch('/items/{id}/update-stock', [ItemController::class, 'updateStock'])->name('items.update-stock');
+    Route::get('/items/{id}/stock-card', [ItemController::class, 'viewStockCard'])->name('items.stock-card');
 });
 
 require __DIR__.'/auth.php';
