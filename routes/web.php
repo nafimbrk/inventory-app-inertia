@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/items/{id}/edit-stock', [ItemController::class, 'editStock'])->name('items.edit-stock');
     Route::patch('/items/{id}/update-stock', [ItemController::class, 'updateStock'])->name('items.update-stock');
     Route::get('/items/{id}/stock-card', [ItemController::class, 'viewStockCard'])->name('items.stock-card');
+    Route::delete('/items/{id}', [ItemController::class, 'destroy'])->name('items.destroy');
 });
 
 require __DIR__.'/auth.php';

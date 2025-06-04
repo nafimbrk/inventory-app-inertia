@@ -2,10 +2,19 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { useForm } from "@inertiajs/vue3";
 
 defineProps({
     items: Array,
 });
+
+const form = useForm({});
+
+const deleteItem = (id) => {
+    if (confirm("Yakin ingin menghapus item ini?")) {
+        form.delete(`/items/${id}`);
+    }
+};
 </script>
 <template>
     <Head title="Items" />
@@ -59,7 +68,8 @@ defineProps({
                                     <td class="border px-4 py-2">
                                        <a :href="`/items/${item.id}/edit`" class="text-blue-400 hover:text-blue-700">edit</a> |
                                        <a :href="`/items/${item.id}/edit-stock`" class="text-blue-400 hover:text-blue-700">edit stock</a> |
-                                       <a :href="`/items/${item.id}/stock-card`" class="text-blue-400 hover:text-blue-700">stock card</a>
+                                       <a :href="`/items/${item.id}/stock-card`" class="text-blue-400 hover:text-blue-700">stock card</a> |
+                                       <button @click="deleteItem(item.id)" class="text-red-500 hover:text-red-700">delete</button>
                                     </td>
                                 </tr>
                             </tbody>

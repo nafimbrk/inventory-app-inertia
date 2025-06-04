@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('stock_cards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('item_id')->constrained();
+            $table->foreignId('item_id')->constrained()->onDelete('cascade');
             $table->double('qty');
             $table->enum('note', ['in', 'out']);
             $table->text('description')->nullable();
